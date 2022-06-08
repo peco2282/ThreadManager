@@ -57,6 +57,7 @@ async def archive(ctx: ApplicationContext):
 
 
 @bot.slash_command(guild_ids=guild_ids, description="Change thread title.")
+@bot_has_guild_permissions(manage_threads=True)
 async def set_title(
         ctx: ApplicationContext,
         name: Option(str, description="New thread title")
@@ -82,7 +83,7 @@ async def main(ctx: ApplicationContext): return await ctx.respond("main")
 
 
 @bot.command(name="archive", aliases=["arc"])
-@
+@bot_has_guild_permissions(manage_threads=True)
 async def arcive_on_command(
         ctx: Context
 ) -> None:
