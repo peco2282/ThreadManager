@@ -60,7 +60,7 @@ async def archive(ctx: ApplicationContext):
 @bot_has_guild_permissions(manage_threads=True)
 async def set_title(
         ctx: ApplicationContext,
-        name: Option(str, description="New thread title")
+        new_title: Option(str, description="New thread title")
 ):
     old_title = ctx.channel.name
     if not isinstance(ctx.channel, Thread):
@@ -71,9 +71,9 @@ async def set_title(
         )
         return await msg.delete(delay=3)
 
-    await ctx.channel.edit(name=name)
+    await ctx.channel.edit(name=new_title)
     await ctx.respond(
-        f"changed thread name from {old_title} -> {name}"
+        f"changed thread name from {old_title} -> {new_title}"
     )
 
 
