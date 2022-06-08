@@ -79,7 +79,10 @@ async def set_title(
 
 @bot.slash_command(guild_ids=guild_ids)
 @default_permissions(administrator=True)
-async def main(ctx: ApplicationContext): return await ctx.respond("main")
+async def threads(ctx: ApplicationContext):
+    threads = ctx.channel.threads
+    tstring = "\n".join([f"**{t.name}**" for t in threads])
+    await ctx.respond(tstring)
 
 
 @bot.command(name="archive", aliases=["arc"])
@@ -149,7 +152,8 @@ async def help_on_command(ctx: Context):
                     f"{bot.command_prefix}archive  -> thread archive. (you can play this command **only Thread**)\n"
                     f"{bot.command_prefix}set title `<NEW_THREAD_TITLE> (required)` -> thread name change to `NEW_THREAD_TITLE`\n\n\n"
                     f"- **Shash commands**\n\n"
-                    f"/archive -> "
+                    f"/archive -> thread archive.\n"
+                    f"/set title `<NEW_THREAD_TITLE> (required)"
     )
 
 
