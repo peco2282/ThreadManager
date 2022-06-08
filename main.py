@@ -6,11 +6,13 @@ from discord import (
     Option,
     Intents,
     Thread,
-    default_permissions, Embed
+    default_permissions,
+    Embed
 )
 from discord.ext.commands import (
     Bot,
-    Context
+    Context,
+    bot_has_guild_permissions
 )
 from dotenv import load_dotenv
 
@@ -37,7 +39,7 @@ positive_emoji: str = "\U00002705"
 negative_emoji: str = "\U0000274e"
 
 
-@bot.slash_command(guild_ids=guild_ids)
+@bot.slash_command(guild_ids=guild_ids, description="Archive thread.")
 async def archive(ctx: ApplicationContext):
     if not isinstance(ctx.channel, Thread):
         return await ctx.respond(
@@ -54,10 +56,10 @@ async def archive(ctx: ApplicationContext):
     )
 
 
-@bot.slash_command(guild_ids=guild_ids)
+@bot.slash_command(guild_ids=guild_ids, description="Change thread title.")
 async def set_title(
         ctx: ApplicationContext,
-        name: Option(str, description="edit thread title")
+        name: Option(str, description="New thread title")
 ):
     old_title = ctx.channel.name
     if not isinstance(ctx.channel, Thread):
@@ -80,6 +82,7 @@ async def main(ctx: ApplicationContext): return await ctx.respond("main")
 
 
 @bot.command(name="archive", aliases=["arc"])
+@
 async def arcive_on_command(
         ctx: Context
 ) -> None:
